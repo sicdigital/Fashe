@@ -29,8 +29,8 @@ $(document).ajaxStop(function() {
     return !$.trim(el.html())
   }
   if (!isEmpty($('#product'))) {
-    $('#product .option-container').addClass('has-option');      
-  }	
+    $('#product .option-container').addClass('has-option');
+  }
 });
 function divWidthMenu() {
   var width_br = $(".container-fix .block-right").outerWidth(true);
@@ -41,7 +41,7 @@ function divWidthMenu() {
   }
 }
 function customResponsive(){
-  var window_w = parseInt($(window).width());	
+  var window_w = parseInt($(window).width());
 
   $(".group1 #logo img").each(function() {
     if( this.complete ) {
@@ -64,13 +64,13 @@ $(window).resize(function() {
 $(document).ready(function() {
   var className = $('header').attr('class');
   if ($(".header3").length) {
-    $('.contentforlayout').addClass('container1-page');	
+    $('.contentforlayout').addClass('container1-page');
   }
 
   // vertical thumbs on product page
-  
 
-  // product video 
+
+  // product video
   $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
     type: 'iframe',
     mainClass: 'mfp-fade',
@@ -132,7 +132,9 @@ $(document).ready(function() {
         swal("Added to cart Successfully !", "success");
 
         $.getJSON('/cart.js', function(cart) {
-          $('#cart-total').html(cart.item_count);
+          $('.header-icons-noti').each(function(){
+            $(this).html(cart.item_count);
+          })
           Currency.convertAll(shopCurrency, Currency.cookie.read());
         });
 
@@ -151,7 +153,7 @@ $(document).ready(function() {
   });
 
   // move breadcrumbs
-  $("header").after('<div class="breadcrumbs"><div class="container"></div></div>');	
+  $("header").after('<div class="breadcrumbs"><div class="container"></div></div>');
   var breadcrumb = $('ul.breadcrumb');
   var breadcrumbs_container = $('.breadcrumbs .container');
   breadcrumb.appendTo(breadcrumbs_container);
@@ -161,7 +163,7 @@ $(document).ready(function() {
   var sticky_menu = $('#sticky-menu').attr('data-sticky');
   if (sticky_menu==1){
     var headerSpaceH = $('header').outerHeight(true);
-    $('header').after('<div class="headerSpace unvisible" style="height:'+headerSpaceH+'px;"></div>');	
+    $('header').after('<div class="headerSpace unvisible" style="height:'+headerSpaceH+'px;"></div>');
   }
   // Scroll
   var currentP = 0;
@@ -193,20 +195,20 @@ $(document).ready(function() {
     }
   });
 
-  $('.container-fix').hover(function(){ 
+  $('.container-fix').hover(function(){
     $(this).addClass("fix-header-act");
-  },function(){ 
+  },function(){
     $(this).removeClass("fix-header-act");
   });
 
   customResponsive();
 
   if (!isEmpty($('#product'))) {
-    $('#product .option-container').addClass('has-option');      
+    $('#product .option-container').addClass('has-option');
   }
   if (!isEmpty($('#product2'))) {
-    $('#product2 .option-container').addClass('has-option');      
-  }	
+    $('#product2 .option-container').addClass('has-option');
+  }
 
   // move toolbar category
   $('.layer-category').prepend($('.custom-category .toolbar'));
@@ -340,7 +342,9 @@ var cart = {
 
         $.getJSON('/cart.js', function(cart) {
           setTimeout(function () {
-            $('#cart-total').html(cart.item_count);
+              $('.header-icons-noti').each(function(){
+                  $(this).html(cart.item_count);
+              })
           }, 100);
           //Currency.convertAll(shopCurrency, Currency.cookie.read());
         });
